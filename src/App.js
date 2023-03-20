@@ -11,8 +11,8 @@ function App() {
   const handleOnSearchChange= async (searchData)=>{
     const [latitude, longitude] = searchData.value.split(" ")
     
-    const currentWeatherFetch = await fetch(`${WEATHER_API_URL}/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`)
-    const forecastFetch = await fetch(`${WEATHER_API_URL}/forecast?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`)
+    const currentWeatherFetch = await fetch(`${WEATHER_API_URL}/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}&units=metric`)
+    const forecastFetch = await fetch(`${WEATHER_API_URL}/forecast?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}&units=metric`)
     
     Promise.all([currentWeatherFetch, forecastFetch])
     .then(async(res)=>{
@@ -32,8 +32,7 @@ function App() {
   return (
     <div className="container">
       <Search onSearchChange={handleOnSearchChange}/>
-      <CurrentWeather/>
-    </div>
+{    currentWeather&& <CurrentWeather data={currentWeather}/>}    </div>
   );
 }
 
